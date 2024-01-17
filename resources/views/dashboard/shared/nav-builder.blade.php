@@ -9,7 +9,7 @@ if(!function_exists('renderDropdown')){
             echo '<li class="c-sidebar-nav-dropdown">';
             echo '<a class="c-sidebar-nav-dropdown-toggle" href="#">';
             if($data['hasIcon'] === true && $data['iconType'] === 'coreui'){
-                echo '<i class="' . $data['icon'] . ' c-sidebar-nav-icon"></i>';    
+                echo '<i class="' . $data['icon'] . ' c-sidebar-nav-icon"></i>';
             }
             echo $data['name'] . '</a>';
             echo '<ul class="c-sidebar-nav-dropdown-items">';
@@ -30,13 +30,49 @@ if(!function_exists('renderDropdown')){
 }
 ?>
 
-
         <div class="c-sidebar-brand">
-            <img class="c-sidebar-brand-full" src="{{ url('/assets/brand/coreui-base-white.svg') }}" width="118" height="46" alt="CoreUI Logo">
-            <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/coreui-signet-white.svg') }}" width="118" height="46" alt="CoreUI Logo">
+            <img class="c-sidebar-brand-full" src="{{ url('/assets/img/LOGO-MKU__-300x215.png') }}" width="78.13" height="56" alt="CoreUI Logo">
+            <img class="c-sidebar-brand-minimized" src="{{ url('assets/img/LOGO-MKU__-300x215.png') }}" width="58.13" height="36" alt="CoreUI Logo">
         </div>
         <ul class="c-sidebar-nav">
-        @if(isset($appMenus['sidebar menu']))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="/home">
+                    <i class="cil-speedometer c-sidebar-nav-icon"></i>
+                    Dashboard
+                </a>
+            </li>
+            @if (Auth::user()->roles == 'superadmin')
+                <li class="c-sidebar-nav-dropdown">
+                    <a class="c-sidebar-nav-dropdown-toggle" href="javascript:void(0)">
+                        <i class="cil-file c-sidebar-nav-icon"></i>
+                        Master
+                    </a>
+                    <ul class="c-sidebar-nav-dropdown-items">
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ url('/masterTaskWork') }}"><span class="c-sidebar-nav-icon"></span>Master Task Work</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="c-sidebar-nav-dropdown">
+                    <a class="c-sidebar-nav-dropdown-toggle" href="javascript:void(0)">
+                        <i class="cil-bar-chart c-sidebar-nav-icon"></i>
+                        Report
+                    </a>
+                    <ul class="c-sidebar-nav-dropdown-items">
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ url('/reportCme') }}"><span class="c-sidebar-nav-icon"></span>CME</a>
+                        </li>
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ url('/reportTe') }}"><span class="c-sidebar-nav-icon"></span>TE</a>
+                        </li>
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ url('/reportBattery') }}"><span class="c-sidebar-nav-icon"></span>BATTERY</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
+        {{-- @if(isset($appMenus['sidebar menu']))
             @foreach($appMenus['sidebar menu'] as $menuel)
                 @if($menuel['slug'] === 'link')
                     <li class="c-sidebar-nav-item">
@@ -45,7 +81,7 @@ if(!function_exists('renderDropdown')){
                             @if($menuel['iconType'] === 'coreui')
                                 <i class="{{ $menuel['icon'] }} c-sidebar-nav-icon"></i>
                             @endif
-                        @endif 
+                        @endif
                         {{ $menuel['name'] }}
                         </a>
                     </li>
@@ -57,12 +93,12 @@ if(!function_exists('renderDropdown')){
                             @if($menuel['iconType'] === 'coreui')
                                 <i class="{{ $menuel['icon'] }} c-sidebar-nav-icon"></i>
                             @endif
-                        @endif 
+                        @endif
                         {{ $menuel['name'] }}
                     </li>
                 @endif
             @endforeach
-        @endif
+        @endif --}}
         </ul>
         <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
     </div>
