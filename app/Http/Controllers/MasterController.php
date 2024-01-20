@@ -54,39 +54,12 @@ class MasterController extends Controller
             }
         }
 
-        $masterTaskWork = DB::select('SELECT * FROM table_master_task_work ' . (!empty($whereQuery) ? 'WHERE ' . $whereQuery : ''));
+        $masterTaskWork = DB::select('SELECT * FROM table_master_task_work '.(!empty($whereQuery) ? 'WHERE '.$whereQuery.' ORDER BY fm_office, site_id' : ' ORDER BY fm_office, site_id'));
 
         return view('dashboard.master.masterTaskWork', compact(
             'masterTaskWork', 'bulanFilter', 'tahunFilter', 'kategoriFilter', 'fmofficeFilter', 'fmOffice', 'months', 'currentYear', 'startYear', 'endYear'
         ));
     }
-
-    /* public function masterTaskWork(Request $request){
-        $months = ["JANUARI" => "01", "FEBRUARI" => "02", "MARET" => "03", "APRIL" => "04", "MEI" => "05", "JUNI" => "06", "JULI" => "07", "AGUSTUS" => "08", "SEPTEMBER" => "09", "OKTOBER" => "10", "NOVEMBER" => "11", "DESEMBER" => "12"];
-        $currentYear = date('Y');
-        $startYear = $currentYear;
-        $endYear = $currentYear - 5;
-        $fmOffice = DB::select('SELECT * FROM table_master_fm_office ORDER BY fm_office');
-
-        $bulanFilter = $request->bulanFilter;
-        $tahunFilter = $request->tahunFilter;
-        $kategoriFilter = $request->kategoriFilter;
-        $fmofficeFilter = $request->fmofficeFilter;
-
-        if (!empty($bulanFilter) && !empty($tahunFilter) && !empty($kategoriFilter) && !empty($fmofficeFilter)) {
-            $whereQuery = 'WHERE bulan = '.$bulanFilter.' AND tahun = '.$tahunFilter.' AND assign_to_fme_name LIKE "%'.$fmofficeFilter.'%"'.' AND fm_office = "'.$fmofficeFilter.'"';
-        } else if (!empty($bulanFilter) && !empty($tahunFilter) && !empty($kategoriFilter) && empty($fmofficeFilter)) {
-            $whereQuery = 'WHERE bulan = '.$bulanFilter.' AND tahun = '.$tahunFilter.' AND assign_to_fme_name LIKE "%'.$fmofficeFilter.'%"';
-        } else if (!empty($bulanFilter) && !empty($tahunFilter) && empty($kategoriFilter) && empty($fmofficeFilter)) {
-            $whereQuery = 'WHERE bulan = '.$bulanFilter.' AND tahun = '.$tahunFilter;
-        } else {
-            $whereQuery = 'WHERE bulan = '.$bulanFilter.' AND tahun = '.$tahunFilter;
-        }
-
-        $masterTaskWork = DB::select('SELECT * FROM table_master_task_work '.$whereQuery);
-
-        return view('dashboard.master.masterTaskWork', compact('masterTaskWork', 'bulanFilter', 'tahunFilter', 'kategoriFilter', 'fmofficeFilter', 'fmOffice', 'months', 'currentYear', 'startYear', 'endYear'));
-    } */
 
     public function masterTaskWorkImport(Request $request){
         $bulanUpload = $request->bulanUpload;

@@ -83,7 +83,7 @@
                                 <button class="btn btn-primary ml-2 mr-1" type="submit">{{ __('TAMPIL') }}</button>
                             </div>
                         </form>
-                        @if (!empty($masterTaskWork))
+                        @if (!empty($bulanFilter) || !empty($tahunFilter) || !empty($kategoriFilter) || !empty($fmofficeFilter))
                             <div>
                                 Total Records: {{ count($masterTaskWork) }}
                             </div>
